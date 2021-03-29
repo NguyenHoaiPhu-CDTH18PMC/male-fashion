@@ -1,0 +1,12 @@
+a {
+    text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
+}
+*{
+    box-sizing: border-box;
+    font-family: nunito sans,sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+

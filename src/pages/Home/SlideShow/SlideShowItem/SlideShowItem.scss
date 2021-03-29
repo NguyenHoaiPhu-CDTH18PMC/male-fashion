@@ -1,0 +1,63 @@
+.old-active {
+  > div {
+    transition: backgound 0.3s linear;
+    -webkit-transition: backgound 0.3s linear;
+    -moz-transition: backgound 0.3s linear;
+    -ms-transition: backgound 0.3s linear;
+    -o-transition: backgound 0.3s linear;
+  }
+  #btn-shop-now {
+    animation: oldActive 0.8s linear;
+    -webkit-animation: oldActive 0.8s linear;
+  }
+  h6 {
+    animation: oldActive 0.5s linear;
+    -webkit-animation: oldActive 0.5s linear;
+  }
+  h2 {
+    animation: oldActive 0.6s linear;
+    -webkit-animation: oldActive 0.6s linear;
+  }
+  p {
+    animation: oldActive 0.7s linear;
+    -webkit-animation: oldActive 0.7s linear;
+  }
+}
+.new-active {
+  #btn-shop-now {
+    animation: newActive 0.8s linear;
+    -webkit-animation: newActive 0.8s linear;
+  }
+  h6 {
+    animation: newActive 0.5s linear;
+    -webkit-animation: newActive 0.5s linear;
+  }
+  h2 {
+    animation: newActive 0.6s linear;
+    -webkit-animation: newActive 0.6s linear;
+  }
+  p {
+    animation: newActive 0.7s linear;
+    -webkit-animation: newActive 0.7s linear;
+  }
+}
+@keyframes oldActive {
+  0% {
+    top: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 100px;
+    opacity: 0;
+  }
+}
+@keyframes newActive {
+  0% {
+    top: 100px;
+    opacity: 0;
+  }
+  100% {
+    top: 0;
+    opacity: 1;
+  }
+}
