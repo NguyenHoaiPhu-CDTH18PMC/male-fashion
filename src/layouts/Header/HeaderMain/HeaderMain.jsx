@@ -84,6 +84,7 @@ class HeaderMain extends Component {
           idMenu={idMenu}
           idNoFocus={idNoFocus}
           toggleMenu={toggleMenu}
+          cartList={cartList} 
         />
       </Box>
     );
