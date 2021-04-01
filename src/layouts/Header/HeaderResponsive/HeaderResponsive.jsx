@@ -1,7 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
 
-import { withStyles } from "@material-ui/core/styles";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import iconSearch from "../../../assets/images/search.webp";
@@ -9,7 +9,7 @@ import iconHeart from "../../../assets/images/heart.webp";
 import iconCart from "../../../assets/images/cart.webp";
 import { withTheme } from "@material-ui/styles";
 
-const useStyle = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   canvasMenuWraper: {
     position: "fixed",
     width: "300px",
@@ -176,10 +176,32 @@ const useStyle = (theme) => ({
       display: "none",
     },
   },
-});
-class HeaderResponsive extends Component {
-  render() {
-    const { classes, isOpenMenu, idMenu, idNoFocus, toggleMenu } = this.props;
+}));
+function HeaderResponsive(props){
+    const { cartList , isOpenMenu, idMenu, idNoFocus, toggleMenu } = props;
+    const classes = useStyles();
+  
+    const [newCartList, setNewCartList] = useState(cartList);
+    useEffect(() => {
+      if (JSON.parse(localStorage.getItem("cartList"))) {
+        setNewCartList(JSON.parse(localStorage.getItem("cartList")));
+      } else {
+        setNewCartList([]);
+      }
+    }, []);
+    useEffect(() => {
+      if (JSON.parse(localStorage.getItem("cartList"))) {
+        setNewCartList(JSON.parse(localStorage.getItem("cartList")));
+      } else {
+        setNewCartList([]);
+      }
+    }, [cartList]);
+  
+    const sumPrice = (newCartList) => {
+      return newCartList.reduce((sum, cart) => sum + parseFloat(cart.total), 0);
+    };
+    const totalCount = newCartList.length;
+    const totalPrice = sumPrice(newCartList);
     return (
       <>
         <Box className={classes.canvasMenuWraper} id={idMenu}>
@@ -210,10 +232,10 @@ class HeaderResponsive extends Component {
             <Link underline="none" to="">
               <img src={iconHeart} alt="" />
             </Link>
-            <Link underline="none" to="">
-              <img src={iconCart} alt="" /> <span>0</span>
+            <Link to="/shopping-cart">
+              <img src={iconCart} alt="" /> <span>{totalCount}</span>
             </Link>
-            <Box className={classes.price}>$0.00</Box>
+            <Box className={classes.price}>{`$${totalPrice}`}</Box>
           </Box>
           <Box id="mobile-menu-wrap" className={classes.mobileMenuWrap}>
             <Box className={classes.slickNavMenu}>
@@ -290,6 +312,5 @@ class HeaderResponsive extends Component {
         ></div>
       </>
     );
-  }
 }
-export default withStyles(useStyle)(HeaderResponsive);
+export default HeaderResponsive;
