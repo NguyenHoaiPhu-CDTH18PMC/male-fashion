@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function ProductDetails(props) {
-  const { productList } = props;
+  const { productList, cartList, changeCount , addToCart } = props;
   const classes = useStyles();
   const param = useParams();
   const pid = param.id;
@@ -80,7 +80,7 @@ function ProductDetails(props) {
             className={classes.detailHead}
           />
           <Box padding="100px 12em" className={classes.detailContent}>
-            <ProductDetailOptionMid findProductDetail={findProductDetail} />
+            <ProductDetailOptionMid findProductDetail={findProductDetail} cartList={cartList} changeCount={changeCount}    addToCart={addToCart}/>
             <ProductDetailTab findProductDetail={findProductDetail} />
             {/* <ProductDetailListBottom productList={productList} /> */}
           </Box>
