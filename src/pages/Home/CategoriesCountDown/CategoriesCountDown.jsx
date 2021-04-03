@@ -323,7 +323,7 @@ function CategoriesCountDown(props) {
   const [timmerSeconds, setTimmerSeconds] = useState("00");
   let interval = useRef();
   const startTimer = () => {
-    const countDownDate = new Date("April 5, 2021 00:00:00").getTime();
+    const countDownDate = new Date("April 5, 2022 00:00:00").getTime();
     interval = setInterval(() => {
       const now = new Date().getTime();
       const distance = countDownDate - now;
