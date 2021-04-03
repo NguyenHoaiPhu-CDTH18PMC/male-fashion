@@ -482,14 +482,14 @@ class App extends Component {
       }
     );
   };
-  addToCart = (product) => {
+  addToCart = (product , count ) => {
     const { cartList } = this.state;
     // tim xem san pham them co ton tai trong gio hang hay chua neu co thi tang so luong
     const findCart = cartList.find((item) => item.idProduct === product.id);
     // neu co ton tai trung
     if (findCart) {
       //So luong nho hon 10 thi moi tang
-      if (findCart.count < 10) {
+      if (findCart.count+count <= 10) {
         this.setState(
           {
             cartData: {
@@ -498,8 +498,8 @@ class App extends Component {
               name: product.name,
               image: product.image,
               price: product.price,
-              count: findCart.count + 1,
-              total: product.price * (findCart.count + 1),
+              count: findCart.count + count,
+              total: product.price * (findCart.count + count),
             },
             isShowAlert: 1,
             isSuccess: true,
@@ -533,8 +533,8 @@ class App extends Component {
             name: product.name,
             image: product.image,
             price: product.price,
-            count: 1,
-            total: product.price * 1,
+            count: count,
+            total: product.price * count,
           },
           isShowAlert: 1,
           isSuccess: true,
@@ -1053,7 +1053,11 @@ class App extends Component {
               />
             </Route>
             <Route exact path="/detail/:id/:slug">
-              <ProductDetails productList={productList} />
+              <ProductDetails
+                addToCart={this.addToCart}
+                productList={productList}
+                cartList={cartList}
+                changeCount={this.changeCount} />
             </Route>
             <Route exact path="/shopping-cart">
               <withRoute>

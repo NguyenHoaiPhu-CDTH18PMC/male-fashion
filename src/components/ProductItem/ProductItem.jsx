@@ -190,7 +190,7 @@ class ProductItem extends Component {
       },
       () => this.callBackSetState()
     );
-    this.props.addToCart(this.props.product);
+    this.props.addToCart(this.props.product , 1);
   };
   callBackSetState = () => {
     setTimeout(() => {

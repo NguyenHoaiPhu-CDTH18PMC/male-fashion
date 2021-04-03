@@ -227,8 +227,37 @@ const useStyles = (theme) => ({
   },
 });
 class ProductDetailOptionMid extends Component {
+  state = {
+    count: 0,
+  }
+ 
+  handleAddCart = () => {
+    this.props.addToCart(this.props.findProductDetail , this.state.count);
+  };
+  handleChangeCount = (value) => {
+    if (value <= 10 && value >= 1) {
+      this.setState({
+        count: value
+      })
+    }
+  };
+  handleUpCount = () => {
+    if (this.state.count < 10) {
+      this.setState({
+        count: this.state.count + 1
+      })
+    }
+  };
+  handleDownCount = () => {
+    if (this.props.cart.count > 1) {
+      this.setState({
+        count: this.state.count - 1,
+      })
+    }
+  };
   render() {
-    const { classes, findProductDetail } = this.props;
+    const { classes, findProductDetail, cartList, changeCount ,  addToCart } = this.props;
+    const findCart = cartList.find((item) => item.idProduct === findProductDetail.id);
     return (
       <Box display="flex" justifyContent="center">
         <Box width="70%" className={classes.mainDetails}>
@@ -293,12 +322,16 @@ class ProductDetailOptionMid extends Component {
                     min="0"
                     max="10"
                     className={classes.inputNumber}
+                    value={this.state.count}
+                    onChange={(e) =>
+                      this.handleChangeCount(Number(e.target.value))
+                    }
                   />
                 </Box>
               </Box>
               <Link
                 underline="none"
-                href="#"
+                onClick={this.handleAddCart}
                 id="add-cart-detail"
                 className={classes.addCart}
               >
