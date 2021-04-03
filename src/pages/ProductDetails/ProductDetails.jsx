@@ -60,6 +60,7 @@ function ProductDetails(props) {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     axios
       .get(END_POINT + "/ListProduct/" + pid)
       .then((response) => {
